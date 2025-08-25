@@ -671,8 +671,8 @@ class JLink(object):
         Raises:
           ValueError: if index is less than 0 or >= supported device count.
         """
-        if not util.is_natural(index) or index >= self.num_supported_devices():
-            raise ValueError('Invalid index.')
+        if not util.is_natural(index):
+            raise ValueError(f'Invalid index {index}.')
 
         info = structs.JLinkDeviceInfo()
 
