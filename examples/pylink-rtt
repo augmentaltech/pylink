@@ -57,8 +57,15 @@ def read_rtt(jlink):
     try:
         while jlink.connected():
             terminal_bytes = jlink.rtt_read(0, 1024)
+            time_s = time.strftime("%a, %d %b %Y %H:%M:%S ", time.localtime())
             if terminal_bytes:
-                sys.stdout.write("".join(map(chr, terminal_bytes)))
+                res = [time_s]
+                last_idx = len(terminal_bytes) - 1
+                for idx, c in enumerate(map(chr, terminal_bytes)):
+                    res.append(c)
+                    if (c == '\n' and idx != last_idx):
+                        res.append(time_s)
+                sys.stdout.write("".join(res))
                 sys.stdout.flush()
             time.sleep(0.1)
     except Exception:
