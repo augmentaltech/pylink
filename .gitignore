@@ -102,3 +102,7 @@ ENV/
 
 # Mac Artifacts
 **.DS_Store
+
+
+# direnv
+.direnv/
